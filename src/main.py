@@ -5,8 +5,8 @@ from tasks.summarize import summarize
 from tasks.display import print_summary
 from tasks.export import export_to_ndjson
 
-DATA_SOURCE = os.environ.get("DATA_SOURCE") or "../sample_call_data.csv"
-DESTINATION = os.environ.get("DESTINATION") or "../exported-sample_call_data.ndjson"
+DATA_SOURCE = os.environ.get("DATA_SOURCE", "../sample_call_data.csv")
+DESTINATION = os.environ.get("DESTINATION", "../exported-sample_call_data.ndjson")
 
 
 def main():

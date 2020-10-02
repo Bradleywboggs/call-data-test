@@ -8,5 +8,4 @@ from typing import Dict, List, Union
 
 def get_data(file_name) -> List[Dict[str, Union[str, Dict]]]:
     with open(file_name, newline="") as data_file:
-        data = [line for line in csv.DictReader(data_file)]
-    return data
+        return [line for line in csv.DictReader(data_file)]

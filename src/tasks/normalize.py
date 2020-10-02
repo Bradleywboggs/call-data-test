@@ -2,7 +2,7 @@ from typing import Dict, List, Union
 import dateutil.parser
 
 
-_LIST_OF_KNOWN_PROPS = ["ID", "CALL_ID", "START", "END", "CUSTOMER_NAME", "AGENT_NAME"]
+_LIST_OF_KNOWN_PROPS = {"ID", "CALL_ID", "START", "END", "CUSTOMER_NAME", "AGENT_NAME"}
 
 
 def normalize(records: List[Dict[str, Union[str, Dict]]]) -> List[Dict]:
