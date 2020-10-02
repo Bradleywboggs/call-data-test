@@ -1,7 +1,8 @@
 import os.path
-from src import normalizer, exporter, retriever, summarizer
+from tasks import exporter, normalizer, retriever, summarizer
 
-_FILE_PATH = "./tests/test-sample-data.csv"
+_DATA_SOURCE = "./tests/test-sample-data.csv"
+_DESTINATION = "./tests/exported.ndjson"
 
 records_from_csv = [
     {
@@ -90,7 +91,7 @@ transformed = [
 
 
 def test_raw_data_loader_generates_dictionary_from_csv():
-    actual = retriever.get_data(_FILE_PATH)
+    actual = retriever.get_data(_DATA_SOURCE)
     expected = [
         {
             "ACW": "7",
@@ -171,10 +172,9 @@ def test_summarize_creates_summary_dictionary():
 
 
 def test_export_json_to_file_exports_file():
-    filepath = "./tests/exported.ndjson"
     # set up: delete the file, if it's already present
-    if os.path.isfile(filepath):
-        os.remove(filepath)
+    if os.path.isfile(_DESTINATION):
+        os.remove(_DESTINATION)
 
-    exporter.export_to_ndjson(transformed, filepath)
-    assert os.path.isfile(filepath)
+    exporter.export_to_ndjson(transformed, _DESTINATION)
+    assert os.path.isfile(_DESTINATION)

@@ -28,10 +28,3 @@ def _aggregate_agent_durations(
     duration = record.get("duration") or 0
     initial_total = agent_durations.get(agent_name) or 0
     return {**agent_durations, agent_name: int(duration) + int(initial_total)}
-
-
-def print_summary(summary: Dict) -> None:
-    print(f"Total duration: {summary.get('total_durations')}")
-    print("Agent durations:")
-    for agent, duration in summary.get("agent_durations").items():
-        print(f"\t{agent.title()}: {duration}")

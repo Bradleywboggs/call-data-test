@@ -1,8 +1,9 @@
 import os
-from retriever import get_data
-from normalizer import normalize
-from summarizer import summarize, print_summary
-from exporter import export_to_ndjson
+from tasks.retriever import get_data
+from tasks.normalizer import normalize
+from tasks.summarizer import summarize
+from tasks.printer import print_summary
+from tasks.exporter import export_to_ndjson
 
 DATA_SOURCE = os.environ.get("DATA_SOURCE") or "../sample_call_data.csv"
 DESTINATION = os.environ.get("DESTINATION") or "../exported-sample_call_data.ndjson"
