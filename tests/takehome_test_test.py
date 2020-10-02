@@ -1,5 +1,5 @@
 import os.path
-from tasks import exporter, normalizer, retriever, summarizer
+from tasks import export, normalize, extract, summarize
 
 _DATA_SOURCE = "./tests/test-sample-data.csv"
 _DESTINATION = "./tests/exported.ndjson"
@@ -91,7 +91,7 @@ transformed = [
 
 
 def test_raw_data_loader_generates_dictionary_from_csv():
-    actual = retriever.get_data(_DATA_SOURCE)
+    actual = extract.get_data(_DATA_SOURCE)
     expected = [
         {
             "ACW": "7",
@@ -132,7 +132,7 @@ def test_raw_data_loader_generates_dictionary_from_csv():
 
 
 def test_transform_record_returns_transformed_record():
-    actual = normalizer._transform_record(records_from_csv[0])
+    actual = normalize._transform_record(records_from_csv[0])
     expected = {
         "id": "84ef8-bfede-7972af",
         "call_id": "971-605-3989x98841",
@@ -151,14 +151,14 @@ def test_transform_record_returns_transformed_record():
 
 
 def test_normalize_records_record_returns_all_records_normalized():
-    actual = normalizer.normalize(records_from_csv)
+    actual = normalize.normalize(records_from_csv)
     expected = transformed
 
     assert actual == expected
 
 
 def test_summarize_creates_summary_dictionary():
-    actual = summarizer.summarize(transformed)
+    actual = summarize.summarize(transformed)
     expected = {
         "total_durations": 2121,
         "agent_durations": {
@@ -176,5 +176,5 @@ def test_export_json_to_file_exports_file():
     if os.path.isfile(_DESTINATION):
         os.remove(_DESTINATION)
 
-    exporter.export_to_ndjson(transformed, _DESTINATION)
+    export.export_to_ndjson(transformed, _DESTINATION)
     assert os.path.isfile(_DESTINATION)
