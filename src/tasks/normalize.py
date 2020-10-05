@@ -1,12 +1,13 @@
 from typing import Dict, List, Union
 import dateutil.parser
+from data.call_record import CallRecord
 
 
 _LIST_OF_KNOWN_PROPS = {"ID", "CALL_ID", "START", "END", "CUSTOMER_NAME", "AGENT_NAME"}
 
 
-def normalize(records: List[Dict[str, Union[str, Dict]]]) -> List[Dict]:
-    return [_transform_record(record) for record in records]
+def normalize(records: List[Dict[str, str]]) -> List[CallRecord]:
+    return [CallRecord(**_transform_record(record)) for record in records]
 
 
 def _transform_record(record: Dict[str, str]) -> Dict[str, Union[str, Dict]]:
